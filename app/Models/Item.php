@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -15,9 +16,22 @@ class Item extends Model
         'user_id',
         'name',
         'type',
+        'price',
         'detail',
     ];
-
+    protected $guarded = ['id','user_id'];
+    public static $types = [
+        1 => '本',
+        2 => '玩具',
+        3 => '日用品',
+        4 => '衣類',
+        5 => '家電',
+        6 => 'アウトドア',
+        7=> '美容',
+        8 => '音楽・映像作品',
+        9 => '食品',
+        0 => 'その他'
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -33,4 +47,12 @@ class Item extends Model
      */
     protected $casts = [
     ];
+
+    use SoftDeletes;
+    /**
+     * ソフトデリート
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

@@ -27,7 +27,9 @@
                                 <th>ID</th>
                                 <th>名前</th>
                                 <th>種別</th>
+                                <th>価格</th>
                                 <th>詳細</th>
+                                <th>編集</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,8 +37,16 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>{{ App\Models\Item::$types[$item->type] }}</td>
+                                    <td>{{ $item->price }}</td>
                                     <td>{{ $item->detail }}</td>
+                                    <td>
+                                        <form action="{{ route('edit',$item->id) }}" method="POST" class="form-group">
+                                            @csrf
+                                            @method('GET')
+                                            <input type="submit" value="編集">
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -19,8 +19,10 @@ class CreateItemsTable extends Migration
             $table->string('name', 100)->index();
             $table->string('status', 100)->default('active');
             $table->smallInteger('type')->nullable();
+            $table->string('price',100)->default(0);#単価
             $table->string('detail', 500)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

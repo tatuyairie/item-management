@@ -30,7 +30,17 @@
 
                         <div class="form-group">
                             <label for="type">種別</label>
-                            <input type="number" class="form-control" id="type" name="type" placeholder="1, 2, 3, ...">
+                            <select type="number" class="form-control" id="type" name="type">
+                                @foreach (App\Models\Item::$types as $key => $value)
+                                    <option type="number" value="{{ $key }}" >{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            {{-- <input type="number" class="form-control" id="type" name="type" placeholder="1, 2, 3, ..."> --}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">価格</label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="価格">
                         </div>
 
                         <div class="form-group">

@@ -1,0 +1,164 @@
+@charset "UTF-8";
+/* ホーム画面、サイドバー */
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0%;
+}
+
+.side {
+    position: sticky;
+    flex:0 0 200px;
+    height: 100vh;
+    text-align:center;
+    border:1px solid #8e8c8c;
+  } 
+
+.side p {
+    background-color: rgb(206, 178, 233);
+    margin-top: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    font-weight:bold;
+    font-size: 20px;
+}
+  
+ .content {
+    width:calc(100% - 200px);
+    height: 100vh;
+    position:absolute;	
+    top:0px;
+    right:0px;
+ }
+   
+.content .logout{
+    text-align: end;
+    margin-right: 10px;
+} */
+
+/* ログイン画面、アカウント登録画面 */
+p {
+    text-align: left;
+}
+
+button {
+    height: 40px;
+    width: 150px;
+    border-radius: 5px;
+    border:1px solid;
+    display: block;
+    margin: auto;
+}
+
+.logoutbutton {
+    position: absolute; 
+    left: 25px; 
+    bottom: 40px;
+}
+
+a {
+    text-decoration: none; 
+}
+
+h1 {
+    margin-top: 50px;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* 売上一覧 */
+.search {
+    text-align: left;
+    margin-left: 30px;
+}
+.search-input {
+    width: 350px;
+    height: 35px;
+    font-size: 15px;
+}
+table {
+    margin-left: 30px;
+    width: 95%;
+    height: 100%;
+}
+.sort {
+    cursor: pointer;
+}
+.wide {
+    width: 70px;
+}
+thead {
+    background-color: rgb(174,215,246);
+}
+.id {
+    text-align: center;
+}
+.quantity {
+    text-align: center;
+}
+.listBtn {
+    margin-left: 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* 売上編集・登録画面 */
+main {
+    flex: 1 1 80%;
+    padding: 20px;
+    margin-top: 70px;
+}
+main p {
+    margin: 0 auto;
+    width: 50%;
+}
+.alert {
+    color: crimson;
+}
+.input {
+    position: relative;
+    margin: 0 auto;
+    width: 500px;
+    height: 35px;
+    font-size: 15px;
+}
+.select {
+    width: 508px;
+    height: 40px;
+    font-size: 15px;
+}
+.submit {
+    width: 200px;
+    height: 35px;
+    margin-left: 25%;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+/* main .submit {
+    width: 170px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+} */
+#salesEdit{
+    float: left;
+    width: 170px;
+    height: 35px;
+    margin-left: 8%;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+#salesDelete {
+    float: right;
+    width: 170px;
+    height: 35px;
+    margin-right: 21%;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
