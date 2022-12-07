@@ -2,22 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    public function sale() {
+        return $this->hasOne(Sale::class);
+    }
+    // public function sale()
+    // {
+    //     return $this->belongsTo('App\Models\Sale');
+    // }
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
         'name',
         'type',
+        'quantity',
         'price',
         'detail',
+        'status'
     ];
     protected $guarded = ['id','user_id'];
     public static $types = [
@@ -31,6 +39,10 @@ class Item extends Model
         8 => '音楽・映像作品',
         9 => '食品',
         0 => 'その他'
+    ];
+    public static $status = [
+        'active',
+        'inactive'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -48,11 +60,11 @@ class Item extends Model
     protected $casts = [
     ];
 
-    use SoftDeletes;
+    // use SoftDeletes;
     /**
      * ソフトデリート
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 }

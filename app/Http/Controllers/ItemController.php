@@ -20,10 +20,10 @@ class ItemController extends Controller
      * @param  int  $precision
      * @return \Illuminate\Database\Schema\ColumnDefinition
      */
-    public function softDeletes($column = 'deleted_at', $precision = 0)
-    {
-        return $this->timestamp($column, $precision)->nullable();
-    }
+    // public function softDeletes($column = 'deleted_at', $precision = 0)
+    // {
+    //     return $this->timestamp($column, $precision)->nullable();
+    // }
     /**
      * 商品一覧
      */
@@ -33,6 +33,8 @@ class ItemController extends Controller
         $items = Item
             ::where('items.status', 'active')
             ->select()
+            // ->withTrashed()#論理削除された項目も含め表示する
+            // ->onlyTrashed()#論理削除された項目だけ表示する
             ->get();
 
         return view('item.index', compact('items'));
@@ -50,20 +52,30 @@ class ItemController extends Controller
             ]);
 
             // 商品登録
-            Item::create([
-                'user_id' => Auth::user()->id,
-                'name' => $request->name,
-                'type' => $request->type,
-                'price' => $request->price,
-                'detail' => $request->detail,
-            ]);
-
+            // Item::create([
+            //     'user_id' => Auth::user()->id,
+            //     'name' => $request->name,
+            //     'type' => $request->type,
+            //     'price' => $request->price,
+            //     'quantity' => $request->quantity,
+            //     'detail' => $request->detail,
+            // ]);
+            $item = new Item();
+            $item->user_id = Auth::id();
+            // $sale->item_id = $request->id();
+            $item->fill($request->all())->save();
             return redirect('/items');
         }
 
         return view('item.add');
     }
-    
+    public function status ($id)
+    {
+        Item::where('id',$id)
+        // ->status
+        ->delete();
+        return redirect('/items');
+    }
     public function edit ($id)
     {
         $item = Item::find($id);
@@ -75,16 +87,21 @@ class ItemController extends Controller
             'name' => ['required'], #名前
             'price' => ['required','integer'], #金額
             'type' => ['required', 'string'], #種類、カテゴリー
-            // 'quantity' => ['required','integer'] #在庫数
+            'quantity' => ['required','integer'] #在庫数
         ]);
+        // dd($request);
         $item->fill($request->all())->save();
         return redirect('/items');
         // return redirect()->route('/item',$item)->with('success','編集完了しました');
     }
-    public function salesRegister($id) {
-        $item = Item::find($id);
-        $item->user_id = Auth::id();
-        return view('sales.register',compact('item'));
+    public function salesRegister() {
+        $items = Item
+            ::where('items.status', 'active')
+            ->select()
+            ->get();
+        
+        // $item->user_id = Auth::id();
+        return view('sales.register',compact('items'));
     }
     public function itemDestroy($id)
     {
@@ -93,16 +110,3 @@ class ItemController extends Controller
         // return redirect()->route('/items')->with('success','削除完了しました');
     }
 }
-// class ItemController extends Controller
-// {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-// }

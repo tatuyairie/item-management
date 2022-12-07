@@ -27,6 +27,7 @@
                         <label for="name">名前</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ $item->name }}">
                     </div>
+
                     <div class="form-group">
                         <label for="type">種別</label>
                         <select type="number" class="form-control" id="type" name="type">
@@ -39,21 +40,35 @@
                             @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="price">価格</label>
                         <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}">
                     </div>
+
+                    <div class="form-group">
+                        <label for="quantity">在庫数</label>
+                        <input type="number" class="form-control" id="price" name="quantity" value="{{ $item->quantity }}">
+                    </div>
+
                     <div class="form-group">
                         <label for="detail">詳細</label>
                         <input type="text" class="form-control" id="detail" name="detail" value="{{ $item->detail }}">
                     </div>
+
+                    <div class="form-group">
+                        <label for="status">表示/非表示</label>
+                        <select type="text" class="form-control" id="status" name="status">
+                            @foreach (App\Models\Item::$status as $value)
+                                <option type="number" value="{{ $value }}" >{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">編集</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <button type="submit" class="btn btn-primary">編集</button>
-                </div>
-                {{-- <div class="input-group-append">
-                    <input type="submit" value="編集" id="edit">
-                </div> --}}
                 
             </form>
             <form action="{{ route('itemDestroy',$item->id) }}" method="POST" class="form-group">

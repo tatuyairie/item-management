@@ -35,12 +35,16 @@
                                     <option type="number" value="{{ $key }}" >{{ $value }}</option>
                                 @endforeach
                             </select>
-                            {{-- <input type="number" class="form-control" id="type" name="type" placeholder="1, 2, 3, ..."> --}}
                         </div>
 
                         <div class="form-group">
                             <label for="price">価格</label>
                             <input type="number" class="form-control" id="price" name="price" placeholder="価格">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">在庫数</label>
+                            <input type="number" class="form-control" id="price" name="quantity" placeholder="在庫数">
                         </div>
 
                         <div class="form-group">

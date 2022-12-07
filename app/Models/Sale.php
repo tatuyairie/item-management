@@ -8,8 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','type','price','quantity','detail','total_price'];
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+    // public function items() {
+    //     return $this->hasMany(Item::class);
+    // }
+    protected $fillable = ['name','type','price','quantity','amount','detail','total_price','item_id'];
+
     protected $guarded = ['id','user_id'];
+
     public static $types = [
         1 => '本',
         2 => '玩具',
@@ -17,7 +26,7 @@ class Sale extends Model
         4 => '衣類',
         5 => '家電',
         6 => 'アウトドア',
-        7=> '美容',
+        7 => '美容',
         8 => '音楽・映像作品',
         9 => '食品',
         0 => 'その他'

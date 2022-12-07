@@ -33,3 +33,5 @@ $ npm run dev
 ```
 $ php artisan migrate
 ```
+<!-- seeder --> =以下は登録したいseederファイルの名前
+php artisan db:seed --class=ItemSeeder

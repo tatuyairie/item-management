@@ -245,7 +245,11 @@ return [
             'url'  => 'sales/list',
             'icon' => '',
         ],
-        
+        [
+            'text' => '売上入力',
+            'url'  => 'sales/register',
+            'icon' => '',
+        ],
         // AdminLTEデフォルト
         
         // Navbar items:
