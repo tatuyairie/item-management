@@ -24,7 +24,7 @@ class CreateSalesTable extends Migration
             $table->string('total_price',100)->default(0);#合計金額
             // $table->string('detail', 500)->nullable();
             $table->timestamps();
-            // $table->foreign('item_id')->references('id')->on('items');
+            $table->foreign('item_id')->references('id')->on('items');
         });
     }
 
