@@ -55,7 +55,7 @@ class SaleController extends Controller
                 // dd($request->all());
                 $count ++;
                 $sale = New sale;
-                if ($request->input('amount.'.$count)>0){
+                // if ($request->input('amount.'.$count)>0){
                     Sale::create([
                         'user_id' => $request->input('user_id.'.$count),
                         'item_id' => $request->input('item_id.'.$count),
@@ -65,7 +65,7 @@ class SaleController extends Controller
                         'price' => $request->input('price.'.$count),
                         'total_price' => $request->input('total_price.'.$count),
                     ]);
-                }
+                // }
                 
                 // $sale->user_id = Auth::id();
                 // $sale->where('id', '=', $id);
