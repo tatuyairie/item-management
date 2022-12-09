@@ -23,9 +23,9 @@
                 <div class="card-header">
                     <h3 class="card-title">売上一覧</h3>
                 </div>
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive p-0" style="height: 75vh">
                     <table class="table table-hover text-nowrap">
-                        <thead>
+                        <thead class="sticky-top bg-white">
                             <tr>
                                 <th class="sort" data-sort="id" width="50px">商品コード</th>
                                 <th class="sort" data-sort="name">商品名</th>
