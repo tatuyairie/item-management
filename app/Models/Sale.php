@@ -15,9 +15,9 @@ class Sale extends Model
     // public function items() {
     //     return $this->hasMany(Item::class);
     // }
-    protected $fillable = ['name','type','price','quantity','amount','detail','total_price','item_id'];
+    protected $fillable = ['name','type','price','quantity','amount','detail','total_price','item_id','user_id'];
 
-    protected $guarded = ['id','user_id'];
+    protected $guarded = ['id'];
 
     public static $types = [
         1 => '本',

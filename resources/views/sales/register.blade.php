@@ -41,6 +41,7 @@
                                         <td name="id[{{ $item->id }}]">{{ $item->id }}</td>
                                         <td>
                                             <input type="hidden" name="item_id[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->id }}" readonly style="border: none;">
+                                            <input type="hidden" name="user_id[{{ $item->id }}]" class="form-control" id="name" value="{{ Auth::id() }}" readonly style="border: none;">
                                         </td>
                                         <td>
                                             <input type="text" name="name[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->name }}" readonly style="border: none;">
