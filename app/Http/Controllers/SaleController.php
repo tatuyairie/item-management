@@ -50,7 +50,7 @@ class SaleController extends Controller
             ->select()
             ->get();
             // foreach($request->all() as $id => $item){
-                $count= -4;
+                $count= 4;
             foreach($items as $item){
                 // dd($request->all());
                 $count += 10;
