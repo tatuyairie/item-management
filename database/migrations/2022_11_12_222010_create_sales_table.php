@@ -15,7 +15,7 @@ class CreateSalesTable extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->index();
+            $table->bigInteger('user_id')->default(1);
             $table->bigInteger('item_id')->unsigned()->index();
             $table->string('name', 100)->index();
             $table->smallInteger('type')->nullable();

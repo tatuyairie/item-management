@@ -57,9 +57,9 @@
                                     <td class="price">{{ $item->price }}</td>
 
                                     @if ($item->quantity <= 5)
-                                        <td style="color:red">{{ $item->quantity }}</td>
+                                        <td class="quantity" style="color:red">{{ $item->quantity }}</td>
                                     @else
-                                        <td>{{ $item->quantity }}</td>
+                                        <td class="quantity">{{ $item->quantity }}</td>
                                     @endif
                                     <td>
                                         <form action="{{ route('edit',$item->id) }}" method="POST" class="form-group">

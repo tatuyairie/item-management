@@ -49,20 +49,11 @@ class ItemController extends Controller
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
+                'price' => 'required|max:100',
+                'quantity' => 'required|max:100',
             ]);
-
-            // 商品登録
-            // Item::create([
-            //     'user_id' => Auth::user()->id,
-            //     'name' => $request->name,
-            //     'type' => $request->type,
-            //     'price' => $request->price,
-            //     'quantity' => $request->quantity,
-            //     'detail' => $request->detail,
-            // ]);
             $item = new Item();
             $item->user_id = Auth::id();
-            // $sale->item_id = $request->id();
             $item->fill($request->all())->save();
             return redirect('/items');
         }
@@ -89,18 +80,16 @@ class ItemController extends Controller
             'type' => ['required', 'string'], #種類、カテゴリー
             'quantity' => ['required','integer'] #在庫数
         ]);
-        // dd($request);
         $item->fill($request->all())->save();
         return redirect('/items');
         // return redirect()->route('/item',$item)->with('success','編集完了しました');
     }
-    public function salesRegister() {
+    public function salesRegister(Request $request) {
         $items = Item
             ::where('items.status', 'active')
             ->select()
             ->get();
         
-        // $item->user_id = Auth::id();
         return view('sales.register',compact('items'));
     }
     public function itemDestroy($id)

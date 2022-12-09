@@ -28,6 +28,7 @@ Route::prefix('items')->group(function () {
 });
 Route::get('sales/register', [App\Http\Controllers\ItemController::class, 'salesRegister'])->name('salesRegister');
 Route::post('sales/register', [App\Http\Controllers\SaleController::class, 'salesAdd'])->name('salesAdd');
+// Route::post('sales/register', [App\Http\Controllers\SaleController::class, 'salesStore'])->name('salesStore');
 // ログイン認証した人だけが使える
 // Route::group(['middleware' => 'auth'], function () {
     // 売上関連画面

@@ -19,8 +19,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST">
-            {{-- oninput="total_price.value = Math.round(Number(price.value) * Number(amount.value));"> --}}
+            <form action="{{ route('salesAdd') }}" method="POST" class="form-group">
                     @csrf
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
@@ -33,23 +32,21 @@
                                 <th>価格</th>
                                 <th>売上数</th>
                                 <th>売上金額</th>
-                                <th>登録</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($items as $item)
-                            <form action="{{ route('salesAdd',$item->id) }}" method="POST" class="form-group">
-                                @csrf
                                 <tr>
-                                    <td name="id">{{ $item->id }}</td>
+                                    <td name="id[{{ $item->id }}]">{{ $item->id }}</td>
                                     <td>
-                                        <input type="hidden" name="item_id" class="form-control" id="name" value="{{ $item->id }}" readonly style="border: none;">
+                                        <input type="hidden" name="item_id[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->id }}" readonly style="border: none;">
+                                        <input type="hidden" name="user_id[{{ $item->id }}]" class="form-control" id="name" value="{{ Auth::user()->id }}" readonly style="border: none;">
                                     </td>
                                     <td>
-                                        <input type="text" name="name" class="form-control" id="name" value="{{ $item->name }}" readonly style="border: none;">
+                                        <input type="text" name="name[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->name }}" readonly style="border: none;">
                                     </td>
                                     <td>
-                                        <select type="number" class="form-control" id="type" name="type" style="pointer-events: none; border: none;">
+                                        <select type="number" class="form-control" id="type" name="type[{{ $item->id }}]" style="pointer-events: none; border: none;">
                                             @foreach (App\Models\Sale::$types as $key => $value)
                                                 @if ($item->type === $key)
                                                     <option type="number" value="{{ $key }}" selected>{{ $value }}</option>
@@ -58,22 +55,17 @@
                                                 @endif
                                             @endforeach
                                         </select>
-                                        
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" name="price" value="{{ $item->price }}" readonly style="border: none;">
+                                        <input type="number" class="form-control price" name="price[{{ $item->id }}]" value="{{ $item->price }}" readonly style="border: none;">
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" name="amount" value="0" onchange="reCalc();">
+                                        <input type="number" class="form-control amount" name="amount[{{ $item->id }}]" value="0" onchange="reCalc();">
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" name="total_price" placeholder="" value="" readonly style="border: none;">
-                                    </td>
-                                    <td>
-                                        <button type="submit" class="btn btn-primary">登録</button>
+                                        <input type="number" class="form-control total" name="total_price[{{ $item->id }}]" placeholder="" value="" readonly style="border: none;">
                                     </td>
                                  </tr>
-                                </form>
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -85,7 +77,7 @@
                                 <td></td>
                                 <td style="float: right">総合計</td>
                                 <td>
-                                    <input type="number" class="form-control" id="total" name="total" readonly value="0">円
+                                    <input type="number" class="form-control" id="total" name="total" readonly value="0" disabled>円
                                 </td>
                             </tr>
                         </tfoot>
@@ -95,54 +87,6 @@
                     <button type="submit" class="btn btn-primary">一括登録</button>
                 </div>
             </form>
-            {{-- <div class="card card-primary">
-                <form method="POST"
-                oninput="total_price.value = Math.round(Number(price.value) * Number(quantity.value) /1 );">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="name">名前</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="名前">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="type">種別</label>
-                            <select type="number" class="form-control" id="type" name="type">
-                                @foreach (App\Models\Item::$types as $key => $value)
-                                    @if( $item->type === $key)
-                                        <option type="number" value="{{ $key }}" selected>{{ $value }}</option>
-                                    @else
-                                        <option type="number" value="{{ $key }}">{{ $value }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="number">売上数</label>
-                            <input type="number" class="form-control" id="quantity" name="type" placeholder="売上数">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="number">金額</label>
-                            <input type="number" class="form-control" id="price" name="type" placeholder="金額">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="number">合計金額</label>
-                            <input type="number" class="form-control" id="total_price" name="type" placeholder="合計金額">
-                        </div>
-                        <div class="form-group">
-                            <label for="detail">詳細</label>
-                            <input type="text" class="form-control" id="detail" name="detail" placeholder="詳細説明">
-                        </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">登録</button>
-                    </div>
-                </form>
-            </div> --}}
         </div>
     </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
@@ -153,17 +97,17 @@
         });
     });
     $(function(){
-        $('input[name="price"]').each(function(i){
+        $('input[class$=price]').each(function(i){
         $(this).attr('id','price' + (i+1));
         });
     });
     $(function(){
-        $('input[name="amount"]').each(function(i){
+        $('input[class$=amount]').each(function(i){
         $(this).attr('id','amount' + (i+1));
         });
     });
     $(function(){
-        $('input[name="total_price"]').each(function(i){
+        $('input[class$=total]').each(function(i){
         $(this).attr('id','total_price' + (i+1));
         });
     });
