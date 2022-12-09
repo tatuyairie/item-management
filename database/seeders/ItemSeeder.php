@@ -16,8 +16,8 @@ class ItemSeeder extends Seeder
     {
         Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 19, "name" => "ミルクチョコレート", "price" => 120]);
         Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 24, "name" => "キャラメルチョコ", "price" => 90]);
-        Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 10, "name" => "Rocky", "price" => 140]);
-        Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 13, "name" => "GABAチョコレート", "price" => 130]);        
+        Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 5, "name" => "Rocky", "price" => 140]);
+        Item::create(["user_id" => 1, "status" => "active", "type" => 9, "quantity" => 6, "name" => "GABAチョコレート", "price" => 130]);        
         
     }
     
