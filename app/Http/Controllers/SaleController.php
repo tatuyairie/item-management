@@ -66,12 +66,6 @@ class SaleController extends Controller
                         'total_price' => $request->input('total_price.'.$count),
                     ]);
                 }
-                
-                // $sale->user_id = Auth::id();
-                // $sale->where('id', '=', $id);
-                // $sale->save();
-                // $sale->amount = $amount;
-            
             }
             
             return redirect('sales/list');
