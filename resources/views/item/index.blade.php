@@ -34,11 +34,11 @@
                     <table class="table table-hover text-nowrap">
                         <thead class="sticky-top bg-white">
                             <tr>
-                                <th class="sort" data-sort="id">商品コード</th>
-                                <th class="sort" data-sort="name">商品名</th>
-                                <th class="sort" data-sort="type">種別</th>
-                                <th class="sort" data-sort="price">価格</th>
-                                <th class="sort" data-sort="quantity">在庫数</th>
+                                <th class="sort" data-sort="id" style="cursor: pointer">商品コード</th>
+                                <th class="sort" data-sort="name" style="cursor: pointer">商品名</th>
+                                <th class="sort" data-sort="type" style="cursor: pointer">種別</th>
+                                <th class="sort" data-sort="price" style="cursor: pointer">価格</th>
+                                <th class="sort" data-sort="quantity" style="cursor: pointer">在庫数</th>
                                 {{-- <th>詳細</th> --}}
                                 <th>編集</th>
                                 <th>ステータス</th>
@@ -47,15 +47,10 @@
                         <tbody class="list">
                             @foreach ($items as $item)
                                 <tr>
-                                    <td class="id">0000{{ $item->id }}<br>
-                                        {{-- @foreach ( $item->sales as $val )
-                                            {{ $val->total_price }}<br>
-                                        @endforeach --}}
-                                    </td>
+                                    <td class="id">{{ $item->id }}</td>
                                     <td class="name">{{ $item->name }}</td>
                                     <td class="type">{{ App\Models\Item::$types[$item->type] }}</td>
                                     <td class="price">{{ $item->price }}</td>
-
                                     @if ($item->quantity <= 5)
                                         <td class="quantity" style="color:red">{{ $item->quantity }}</td>
                                     @else
@@ -69,11 +64,6 @@
                                         </form>
                                     </td>
                                     <td>{{ $item->status }}
-                                        {{-- <form action="{{ route('status',$item->id) }}" method="POST" class="form-group">
-                                            @csrf
-                                            @method('POST')
-                                            <input type="submit" value="非表示" onclick='return confirm("本当に非表示にしますか？");'>
-                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

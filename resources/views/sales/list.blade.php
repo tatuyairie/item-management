@@ -27,13 +27,12 @@
                     <table class="table table-hover text-nowrap">
                         <thead class="sticky-top bg-white">
                             <tr>
-                                <th class="sort" data-sort="id" width="50px">商品コード</th>
-                                <th class="sort" data-sort="name">商品名</th>
-                                <th class="sort" data-sort="type">種別</th>
-                                <th class="sort" data-sort="amount">売上数</th>
-                                <th class="sort" data-sort="price">価格</th>
-                                <th class="sort" data-sort="total_price">売上金額</th>
-                                {{-- <th>詳細</th> --}}
+                                <th class="sort" data-sort="id" width="50px" style="cursor: pointer">商品コード</th>
+                                <th class="sort" data-sort="name" style="cursor: pointer">商品名</th>
+                                <th class="sort" data-sort="type" style="cursor: pointer">種別</th>
+                                <th class="sort" data-sort="amount" style="cursor: pointer">売上数</th>
+                                <th class="sort" data-sort="price" style="cursor: pointer">価格</th>
+                                <th class="sort" data-sort="total_price" style="cursor: pointer">売上金額</th>
                                 <th>編集</th>
                             </tr>
                         </thead>
@@ -53,19 +52,7 @@
                                             <input type="submit" value="編集">
                                         </form>
                                     </td>
-                                    {{-- <td>
-                                        <form action="{{ route('destroy',$sale->id) }}" method="POST" class="form-group">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" value="削除" onclick='return confirm("本当に削除しますか？");'>
-                                        </form>
-                                    </td> --}}
                                 </tr>
-                                
-                                {{-- @foreach ( $sale->items as $val )
-                                    {{ $val->name }}
-                                @endforeach
-                                {{ $item>item[0]->name }} --}}
                             @endforeach
                         </tbody>
                     </table>

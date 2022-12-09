@@ -72,9 +72,6 @@
                 <div class="card-body">
                     <button type="submit" class="btn btn-danger" onclick='return confirm("本当に削除しますか？");' >削除</button>
                 </div>
-                {{-- <div class="input-group-append">
-                    <input type="submit" value="削除" id="delete" onclick='return confirm("本当に削除しますか？");' >
-                </div> --}}
             </form>  
         </div>
     </div>
