@@ -50,7 +50,7 @@ class SaleController extends Controller
             ->select()
             ->get();
             // foreach($request->all() as $id => $item){
-                $count=4;
+                $count= -4;
             foreach($items as $item){
                 // dd($request->all());
                 $count += 10;
@@ -78,32 +78,15 @@ class SaleController extends Controller
     {
         // POSTリクエストのとき
         if ($request->isMethod('post')) {
-            // バリデーション
-            $this->validate($request, [
-                'name' => 'required|max:$count00',
-                'price' => 'required|max:$count00',
 
-            ]);
-            // $items = DB::table('items')->get();
             $items = Item
             ::where('items.status', 'active')
             ->select()
             ->get();
-            // foreach($items as $item){
-                // dd($request->all());
-                $sale = New sale;
-                // Sale::create([
-                //     'user_id' => $request->input('user_id'),
-                //     'item_id' => $request->input('item_id'),
-                //     'name' => $request->input('name'),
-                //     'type' => $request->input('type'),
-                //     'price' => $request->input('price'),
-                //     'amount' => $request->input('amount'),
-                //     'total_price' => $request->input('total_price'),
-                // ]);
-                $sale->fill($request->all())->save();
-            // }
-            
+
+            $sale = New sale;
+            $sale->fill($request->all())->save();
+        
             return redirect('sales/list');
         }
                 
