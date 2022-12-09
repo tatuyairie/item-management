@@ -52,11 +52,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="detail">詳細</label>
-                        <input type="text" class="form-control" id="detail" name="detail" value="{{ $item->detail }}">
-                    </div>
-
-                    <div class="form-group">
                         <label for="status">表示/非表示</label>
                         <select type="text" class="form-control" id="status" name="status">
                             @foreach (App\Models\Item::$status as $value)
