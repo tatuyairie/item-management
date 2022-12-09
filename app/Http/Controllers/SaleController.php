@@ -51,7 +51,7 @@ class SaleController extends Controller
             ->get();
             $i = 4;
             $sale = New sale;
-                if ($request->input('amount.'.$count)>0){
+                if ($request->input('amount.'.$i)>0){
                     Sale::create([
                         'user_id' => $request->input('user_id.'.$i),
                         'item_id' => $request->input('item_id.'.$i),
@@ -61,6 +61,7 @@ class SaleController extends Controller
                         'price' => $request->input('price.'.$i),
                         'total_price' => $request->input('total_price.'.$i),
                     ]);
+                } 
                 $count= 4;
             foreach($items as $item){
                 // dd($request->all());
