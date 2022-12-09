@@ -53,7 +53,7 @@ class SaleController extends Controller
                 $count=4;
             foreach($items as $item){
                 // dd($request->all());
-                $count +10;
+                $count += 10;
                 $sale = New sale;
                 if ($request->input('amount.'.$count)>0){
                     Sale::create([
