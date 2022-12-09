@@ -49,7 +49,18 @@ class SaleController extends Controller
             ::where('items.status', 'active')
             ->select()
             ->get();
-            // foreach($request->all() as $id => $item){
+            $i = 4;
+            $sale = New sale;
+                if ($request->input('amount.'.$count)>0){
+                    Sale::create([
+                        'user_id' => $request->input('user_id.'.$i),
+                        'item_id' => $request->input('item_id.'.$i),
+                        'name' => $request->input('name.'.$i),
+                        'type' => $request->input('type.'.$i),
+                        'amount' => $request->input('amount.'.$i),
+                        'price' => $request->input('price.'.$i),
+                        'total_price' => $request->input('total_price.'.$i),
+                    ]);
                 $count= 4;
             foreach($items as $item){
                 // dd($request->all());
