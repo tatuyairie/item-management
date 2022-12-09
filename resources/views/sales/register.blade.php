@@ -19,74 +19,76 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('salesAdd') }}" method="POST" class="form-group">
-                    @csrf
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                            <tr>
-                                <th width="40px">商品コード</th>
-                                <th></th>
-                                <th width="280px">名前</th>
-                                <th>種別</th>
-                                <th>価格</th>
-                                <th>売上数</th>
-                                <th>売上金額</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($items as $item)
+            <div class="card">
+                <form action="{{ route('salesAdd') }}" method="POST" class="form-group">
+                        @csrf
+                    <div class="card-body table-responsive p-0" style="height: 75vh">
+                        <table class="table table-hover text-nowrap">
+                            <thead class="sticky-top bg-white">
                                 <tr>
-                                    <td name="id[{{ $item->id }}]">{{ $item->id }}</td>
+                                    <th width="40px">商品コード</th>
+                                    <th></th>
+                                    <th width="280px">名前</th>
+                                    <th>種別</th>
+                                    <th>価格</th>
+                                    <th>売上数</th>
+                                    <th>売上金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($items as $item)
+                                    <tr>
+                                        <td name="id[{{ $item->id }}]">{{ $item->id }}</td>
+                                        <td>
+                                            <input type="hidden" name="item_id[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->id }}" readonly style="border: none;">
+                                            <input type="hidden" name="user_id[{{ $item->id }}]" class="form-control" id="name" value="{{ Auth::user()->id }}" readonly style="border: none;">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="name[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->name }}" readonly style="border: none;">
+                                        </td>
+                                        <td>
+                                            <select type="number" class="form-control" id="type" name="type[{{ $item->id }}]" style="pointer-events: none; border: none;">
+                                                @foreach (App\Models\Sale::$types as $key => $value)
+                                                    @if ($item->type === $key)
+                                                        <option type="number" value="{{ $key }}" selected>{{ $value }}</option>
+                                                    @else
+                                                        <option type="number" value="{{ $key }}">{{ $value }}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control price" name="price[{{ $item->id }}]" value="{{ $item->price }}" readonly style="border: none;">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control amount" name="amount[{{ $item->id }}]" value="0" onchange="reCalc();">
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control total" name="total_price[{{ $item->id }}]" placeholder="" value="" readonly style="border: none;">
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="float: right">総合計</td>
                                     <td>
-                                        <input type="hidden" name="item_id[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->id }}" readonly style="border: none;">
-                                        <input type="hidden" name="user_id[{{ $item->id }}]" class="form-control" id="name" value="{{ Auth::user()->id }}" readonly style="border: none;">
+                                        <input type="number" class="form-control" id="total" name="total" readonly value="0" disabled>円
                                     </td>
-                                    <td>
-                                        <input type="text" name="name[{{ $item->id }}]" class="form-control" id="name" value="{{ $item->name }}" readonly style="border: none;">
-                                    </td>
-                                    <td>
-                                        <select type="number" class="form-control" id="type" name="type[{{ $item->id }}]" style="pointer-events: none; border: none;">
-                                            @foreach (App\Models\Sale::$types as $key => $value)
-                                                @if ($item->type === $key)
-                                                    <option type="number" value="{{ $key }}" selected>{{ $value }}</option>
-                                                @else
-                                                    <option type="number" value="{{ $key }}">{{ $value }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control price" name="price[{{ $item->id }}]" value="{{ $item->price }}" readonly style="border: none;">
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control amount" name="amount[{{ $item->id }}]" value="0" onchange="reCalc();">
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control total" name="total_price[{{ $item->id }}]" placeholder="" value="" readonly style="border: none;">
-                                    </td>
-                                 </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="float: right">総合計</td>
-                                <td>
-                                    <input type="number" class="form-control" id="total" name="total" readonly value="0" disabled>円
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">一括登録</button>
-                </div>
-            </form>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">一括登録</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
