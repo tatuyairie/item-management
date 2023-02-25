@@ -1,37 +1,43 @@
-## 商品管理システム
+# 商品売上管理システム
 
-### 環境構築手順
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLかPostgreSQLのデータベース作成（名前：item_management）  
-  ローカルでMAMPを使用しているのであれば、MySQL推奨
-* .env にデータベース接続情報追加
-```
-例）
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=item_management
-DB_USERNAME=root
-DB_PASSWORD=root
-```
-* APP_KEY生成
-```
-$ php artisan key:generate
-```
-* Composerインストール
-```
-$ composer install
-```
-* フロント環境構築
-```
-$ npm install
-$ npm run dev
-```
-* マイグレーション
-```
-$ php artisan migrate
-```
-<!-- seeder --> =以下は登録したいseederファイルの名前
-php artisan db:seed --class=ItemSeeder
+## 概要
+このシステムでは商品一覧表示や商品の登録（商品登録については管理者のみ操作可)、商品編集画面で項目を非表示にできます。
+
+在庫数管理のため、商品の在庫数量が５以下の場合数量の文字が赤く表示されるようにしています。
+売上に関しては、売上入力された商品が一覧で表示されています。
+
+売上入力画面は商品一覧からデータを取ってきて
+売上数量を入力すると売上一覧に反映できます。(入力される数量が0の場合は登録されないようになっています。)
+
+各種一覧画面では検索機能とテーブルヘッダーのタイトルクリックでソート可能になっています。
+
+## 主な機能
+- ログイン・ログアウト機能
+- 商品一覧画面
+- 商品新規登録、編集、削除機能
+- 商品検索、並び替え機能
+- 売上一覧画面
+- 売上新規登録、編集、削除機能
+- 売上検索、並び替え機能
+
+## 開発環境
+php 8.1.8
+
+MySQL 5.6.50
+
+Laravel 8.83.26
+
+
+## 設計書
+
+[設計書ページへ](https://docs.google.com/spreadsheets/d/1KQRXOt8SNWGNs7Z99L-7sCyh_zI6lL1G/edit#gid=1028345477)
+
+## システム閲覧
+
+[アプリケーションページへ](https://item-management-irie.herokuapp.com/login)
+
+## テストアカウント情報
+    メールアドレス: testtest@example.com
+
+    パスワード : testtest
