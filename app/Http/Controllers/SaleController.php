@@ -49,7 +49,7 @@ class SaleController extends Controller
             ::where('items.status', 'active')
             ->select()
             ->get();
-            $i = 4;
+            $i = 0;
             $sale = New sale;
                 if ($request->input('amount.'.$i)>0){
                     Sale::create([
@@ -62,10 +62,10 @@ class SaleController extends Controller
                         'total_price' => $request->input('total_price.'.$i),
                     ]);
                 } 
-                $count= 4;
+                $count= 0;
             foreach($items as $item){
                 // dd($request->all());
-                $count += 10;
+                $count ++;
                 $sale = New sale;
                 if ($request->input('amount.'.$count)>0){
                     Sale::create([
